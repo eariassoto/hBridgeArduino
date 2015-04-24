@@ -31,11 +31,12 @@ void hBridge::detenerMotor(motor nMotor){
   } 
 }
 
-void hBridge::frenarMotor(motor nMotor){
-  if (nMotor == MOTOR1)
-    analogWrite(PWMA, 0);
-  else
-    analogWrite(PWMB, 0);
+void hBridge::detenerMotores(){
+  digitalWrite(AIN1, LOW);
+  digitalWrite(AIN2, LOW);
+  digitalWrite(BIN1, LOW);
+  digitalWrite(BIN2, LOW);
+ 
 }
 
 void hBridge::setVelocidad(motor nMotor, int v){
@@ -45,6 +46,11 @@ void hBridge::setVelocidad(motor nMotor, int v){
     else
      velocidadB = v;
   }
+}
+
+void hBridge::setVelocidades(int vA, int vB){
+  velocidadA = vA;
+  velocidadB = vB;
 }
 
 void hBridge::moverMotor(motor nMotor, movimiento tMovimiento){
@@ -69,7 +75,7 @@ void hBridge::moverMotor(motor nMotor, movimiento tMovimiento){
   digitalWrite(STBY, HIGH);
 }
 
-void hBridge::moverMotor(movimiento tMovimiento){
+void hBridge::moverMotores(movimiento tMovimiento){
   switch(tMovimiento){
     case ADELANTE:
     moverMotor(MOTOR1, ADELANTE);

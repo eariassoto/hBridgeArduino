@@ -22,13 +22,15 @@ class hBridge{
   hBridge();
   void motoresStandby();
   void detenerMotor(motor);
-  void frenarMotor(motor);
+  void detenerMotores();
   void setVelocidad(motor, int);
-  void moverMotor(movimiento);
+  void setVelocidades(int, int);
+  
+  void moverMotores(movimiento);
+  void moverMotor(motor, movimiento);
   
   private:
   int velocidadA, velocidadB;
-  void moverMotor(motor, movimiento);
 };
 
 #endif // HBRIDGE_H_
