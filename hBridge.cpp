@@ -1,6 +1,7 @@
 #include "hBridge.h"
 
 hBridge::hBridge(){
+  // defino los pines como de salida
   pinMode(PWMA, OUTPUT);
   pinMode(AIN1, OUTPUT);
   pinMode(AIN2, OUTPUT);
@@ -11,6 +12,7 @@ hBridge::hBridge(){
 
   pinMode(STBY, OUTPUT);
   
+  // velocidad maxima por defecto
   velocidadA = 255;
   velocidadB = 255;
 }
@@ -24,8 +26,7 @@ void hBridge::detenerMotor(motor nMotor){
     digitalWrite(AIN1, LOW);
     digitalWrite(AIN2, LOW);
   }
-  else
-  {
+  else{
     digitalWrite(BIN1, LOW);
     digitalWrite(BIN2, LOW);
   } 
@@ -36,7 +37,6 @@ void hBridge::detenerMotores(){
   digitalWrite(AIN2, LOW);
   digitalWrite(BIN1, LOW);
   digitalWrite(BIN2, LOW);
- 
 }
 
 void hBridge::setVelocidad(motor nMotor, int v){
@@ -55,7 +55,7 @@ void hBridge::setVelocidades(int vA, int vB){
 
 void hBridge::moverMotor(motor nMotor, movimiento tMovimiento){
   
-  boolean pinIn1;
+  boolean pinIn1; // util para decidir luego la direccion del motor
    
   if (tMovimiento == ADELANTE)
     pinIn1 = HIGH;
@@ -63,8 +63,11 @@ void hBridge::moverMotor(motor nMotor, movimiento tMovimiento){
     pinIn1 = LOW;
 
   if(nMotor == MOTOR1){
+    // vemos que los pares de interruptores siempre van al opuesto
     digitalWrite(AIN1, pinIn1);
     digitalWrite(AIN2, !pinIn1); 
+
+    // con esto regulamos la velocidad
     analogWrite(PWMA, velocidadA);
   }
   else{
@@ -85,6 +88,7 @@ void hBridge::moverMotores(movimiento tMovimiento){
     moverMotor(MOTOR1, ATRAS);
     moverMotor(MOTOR2, ATRAS);
     break;
+    // para hacer giros movemos los motores en direcciones opuestas
     case GIRO_DER:
     moverMotor(MOTOR1, ADELANTE);
     moverMotor(MOTOR2, ATRAS);
