@@ -1,32 +1,35 @@
 #include "hBridge.h"
 
-hBridge puenteH;
+hBridge puenteH(200);
+byte byteLeido;
 
-void setup(){}
+void setup(){
+  Serial.begin(9600);
+}
 
 void loop(){
-  puenteH.moverMotores(hBridge::ADELANTE);
-  delay(1000);
-  puenteH.moverMotores(hBridge::ATRAS);
-  delay(1000);
-  puenteH.moverMotores(hBridge::GIRO_DER);
-  delay(1000);
-  puenteH.moverMotores(hBridge::GIRO_IZQ);
-  
-  
-  puenteH.detenerMotores();
-  delay(2000);
-  
-  puenteH.setVelocidades(128, 128);
-  
-  puenteH.moverMotores(hBridge::ADELANTE);
-  delay(1000);
-  puenteH.moverMotores(hBridge::ATRAS);
-  delay(1000);
-  puenteH.moverMotores(hBridge::GIRO_DER);
-  delay(1000);
-  puenteH.moverMotores(hBridge::GIRO_IZQ);
-  delay(1000);
+  if (Serial.available()) {
+    // si la comunicacion en serie esta disponible
+    byteLeido = Serial.read(); // lee el primer byte que
+    
+    switch(byteLeido){
+      case 'q':
+      puenteH.moverMotores(hBridge::ADELANTE);
+      break;
+      case 'w':
+      puenteH.moverMotores(hBridge::ATRAS);
+      break;
+      case 'e':
+      puenteH.moverMotores(hBridge::GIRO_DER);
+      break;
+      case 'r':
+      puenteH.moverMotores(hBridge::GIRO_IZQ);
+      break;
+      case 't':
+      puenteH.detenerMotores();
+      break;
+    }
+  }
 }
 
 

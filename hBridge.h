@@ -20,6 +20,7 @@ class hBridge{
   typedef enum{MOTOR1, MOTOR2} motor;
   
   hBridge();
+  hBridge(int);
   void motoresStandby();
   void detenerMotor(motor);
   void detenerMotores();
