@@ -1,6 +1,7 @@
 #include "hBridge.h"
 
-hBridge::hBridge(){
+hBridge::hBridge(int _AIN1, int _AIN2, int _PWMA, int _BIN1, int _BIN2, int _PWMB, int _STBY): 
+AIN1(_AIN1), AIN2(_AIN2), PWMA(_PWMA), BIN1(_BIN1), BIN2(_BIN2), PWMB(_PWMB), STBY(_STBY){
   // defino los pines como de salida
   pinMode(PWMA, OUTPUT);
   pinMode(AIN1, OUTPUT);
@@ -16,7 +17,7 @@ hBridge::hBridge(){
   velocidadA = 255;
   velocidadB = 255;
 }
-
+/*
 hBridge::hBridge(int v){
   // defino los pines como de salida
   pinMode(PWMA, OUTPUT);
@@ -32,7 +33,7 @@ hBridge::hBridge(int v){
   velocidadA = v;
   velocidadB = v;
 }
-
+*/
 void hBridge::motoresStandby(){
   digitalWrite(STBY, LOW);
 }

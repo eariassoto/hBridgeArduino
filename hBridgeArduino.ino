@@ -1,6 +1,6 @@
 #include "hBridge.h"
 
-hBridge puenteH(200);
+hBridge puenteH(9,8,3,11,12,5,10);
 byte byteLeido;
 
 void setup(){
